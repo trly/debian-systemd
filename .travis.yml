@@ -6,15 +6,13 @@ services:
 
 env:
   matrix:
-  - BASE_IMAGE=debian:buster IMAGE_NAME=debian-systemd TAG=buster
-  - BASE_IMAGE=debian:buster-slim IMAGE_NAME=debian-systemd TAG=buster-slim
-  - BASE_IMAGE=debian:stretch IMAGE_NAME=debian-systemd TAG=stretch
-  - BASE_IMAGE=debian:stretch-slim IMAGE_NAME=debian-systemd TAG=stretch-slim
-  - BASE_IMAGE=debian:jessie IMAGE_NAME=debian-systemd TAG=jessie
-  - BASE_IMAGE=debian:jessie-slim IMAGE_NAME=debian-systemd TAG=jessie-slim
+  - IMAGE_NAME=debian-systemd DOCKERFILE_PATH=systemd/debian/buster TAG=buster
+  - IMAGE_NAME=debian-systemd DOCKERFILE_PATH=systemd/debian/stretch TAG=stretch
+  - IMAGE_NAME=debian-systemd DOCKERFILE_PATH=systemd/debian/jessie TAG=jessie
 
 script:
-  - docker build . -t trly/"$IMAGE_NAME":"$TAG" --build-arg base_image="$BASE_IMAGE"
+  - cd "$DOCKERFILE_PATH"
+  - docker build . -t trly/"$IMAGE_NAME":"$TAG"
 
 after_script:
   - docker images

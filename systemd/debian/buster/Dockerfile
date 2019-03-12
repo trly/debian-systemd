@@ -1,6 +1,4 @@
-ARG base_image
-
-FROM ${base_image}
+FROM debian:buster
 
 ENV LC_ALL C
 ENV DEBIAN_FRONTEND noninteractive
