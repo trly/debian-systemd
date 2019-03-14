@@ -19,6 +19,8 @@ RUN find /etc/systemd/system \
     -not -name '*dbus.service' \
     -exec rm \{} \;
 
+RUN systemctl set-default multi-user.target
+
 VOLUME [ "/sys/fs/cgroup" ]
 
 CMD [ "/lib/systemd/systemd" ]
